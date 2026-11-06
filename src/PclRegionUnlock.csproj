@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>PCL2RegionUnlock</AssemblyName>
+    <RootNamespace>PclRegionUnlock</RootNamespace>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <Version>1.0.0</Version>
+    <Description>第三方工具：对 PCL2 CE 官方 exe 原地解除中国大陆区域限制（仅修改本地字节，不含 PCL 代码）。</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ICSharpCode.Decompiler" Version="11.2.0.10050" />
+  </ItemGroup>
+
+</Project>
