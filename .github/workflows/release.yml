@@ -33,7 +33,7 @@ jobs:
           generate_release_notes: true
           append_body: true
           body: |
-            PCL2 CE 区域限制修复工具 v${{ github.ref_name }}
+            PCL2 CE 区域限制修复工具 ${{ github.ref_name }}
 
             - 自包含单文件版本，无需安装 .NET 运行时。
             - 仅测试 PCL2 CE 2.15.1 x64；其他版本会提示「未找到目标方法」。
