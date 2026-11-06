@@ -24,18 +24,35 @@ jobs:
         shell: pwsh
         run: |
           dotnet publish src/PclRegionUnlock.csproj -c Release -r win-x64 --self-contained true `
-            -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist
+            -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist/sc
+          Copy-Item dist/sc/PCL2RegionUnlock.exe dist/PCL2RegionUnlock-selfcontained.exe
+
+      - name: Publish (framework-dependent single file)
+        shell: pwsh
+        run: |
+          dotnet publish src/PclRegionUnlock.csproj -c Release -r win-x64 --self-contained false `
+            -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist/fdd
+          Copy-Item dist/fdd/PCL2RegionUnlock.exe dist/PCL2RegionUnlock-fdd.exe
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/PCL2RegionUnlock.exe
+          files: |
+            dist/PCL2RegionUnlock-selfcontained.exe
+            dist/PCL2RegionUnlock-fdd.exe
           generate_release_notes: true
           append_body: true
           body: |
             PCL2 CE 区域限制修复工具 ${{ github.ref_name }}
 
-            - 自包含单文件版本，无需安装 .NET 运行时。
+            ## 两个版本，按需下载
+
+            | 文件 | 大小（约） | 运行条件 |
+            |---|---|---|
+            | `PCL2RegionUnlock-selfcontained.exe` | 77 MB | 双击即用，无需安装 .NET 运行时（推荐普通用户） |
+            | `PCL2RegionUnlock-fdd.exe` | 3.3 MB | 需要已安装 .NET 10 运行时（PCL2 CE 用户通常已有） |
+
+            其他说明：
             - 仅测试 PCL2 CE 2.15.1 x64；其他版本会提示「未找到目标方法」。
             - 使用前请关闭 PCL；首次运行会自动备份 `.bak`。
             - 本工具不包含 PCL 代码、不提取密钥；请勿分发打过补丁的 PCL exe。

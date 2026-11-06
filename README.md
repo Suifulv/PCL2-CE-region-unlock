@@ -29,7 +29,9 @@ PCL2 CE 官方 exe 是 .NET single-file bundle（`PCL2_CE_Release_x64.exe`）。
 
 - Windows x64（PCL2 CE 官方发行版为 x64）
 - 目标版本：**仅验证 PCL2 CE 2.15.1 x64**；其他版本未测试
-- .NET 10 运行时（本工具为**框架依赖**发布；想免运行时可用下方命令加 `--self-contained true`）
+- 运行时：官方 Release 提供两种版本——
+  - `PCL2RegionUnlock-selfcontained.exe`（约 77 MB）：自带 .NET 10 运行时，双击即用（推荐普通用户）
+  - `PCL2RegionUnlock-fdd.exe`（约 3.3 MB）：需要已安装 .NET 10 运行时（PCL2 CE 用户通常已有）
 
 ## 使用
 
@@ -51,11 +53,16 @@ PCL2RegionUnlock.exe [选项] [exe 路径...]
 ## 构建
 
 ```powershell
+# 框架依赖（约 3.3 MB，需要目标机器已装 .NET 10 运行时）
 dotnet publish src/PclRegionUnlock.csproj -c Release -r win-x64 --self-contained false `
+  -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist
+
+# 自包含（约 77 MB，免安装运行时）
+dotnet publish src/PclRegionUnlock.csproj -c Release -r win-x64 --self-contained true `
   -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist
 ```
 
-产物在 `dist/PCL2RegionUnlock.exe`。
+产物在 `dist/PCL2RegionUnlock.exe`。推送 `v*` tag 时 GitHub Actions 会自动构建并发布这两个版本（`.github/workflows/release.yml`）。
 
 ## 这个工具不做什么
 
