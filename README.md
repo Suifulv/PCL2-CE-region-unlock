@@ -30,8 +30,8 @@ PCL2 CE 官方 exe 是 .NET single-file bundle（`PCL2_CE_Release_x64.exe`）。
 - Windows x64（PCL2 CE 官方发行版为 x64）
 - 目标版本：**仅验证 PCL2 CE 2.15.1 x64**；其他版本未测试
 - 运行时：官方 Release 提供两种版本——
-  - `PCL2RegionUnlock-selfcontained.exe`（约 77 MB）：自带 .NET 10 运行时，双击即用（推荐普通用户）
-  - `PCL2RegionUnlock-fdd.exe`（约 3.3 MB）：需要已安装 .NET 10 运行时（PCL2 CE 用户通常已有）
+  - `PCL2RegionUnlock-selfcontained.exe`（约 77 MB）：自带 .NET 10 Desktop Runtime，双击即用（推荐普通用户）
+  - `PCL2RegionUnlock-fdd.exe`（约 3.3 MB）：需要已安装 **.NET 10 Desktop Runtime (x64)**（PCL2 CE 运行必需，用户通常已有；微软官方下载：<https://dotnet.microsoft.com/zh-cn/download/dotnet/10.0>）
 
 ## 使用
 
@@ -53,7 +53,7 @@ PCL2RegionUnlock.exe [选项] [exe 路径...]
 ## 构建
 
 ```powershell
-# 框架依赖（约 3.3 MB，需要目标机器已装 .NET 10 运行时）
+# 框架依赖（约 3.3 MB，需要目标机器已装 .NET 10 Desktop Runtime）
 dotnet publish src/PclRegionUnlock.csproj -c Release -r win-x64 --self-contained false `
   -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist
 

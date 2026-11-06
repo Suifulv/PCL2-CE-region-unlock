@@ -49,8 +49,8 @@ jobs:
 
             | 文件 | 大小（约） | 运行条件 |
             |---|---|---|
-            | `PCL2RegionUnlock-selfcontained.exe` | 77 MB | 双击即用，无需安装 .NET 运行时（推荐普通用户） |
-            | `PCL2RegionUnlock-fdd.exe` | 3.3 MB | 需要已安装 .NET 10 运行时（PCL2 CE 用户通常已有） |
+            | `PCL2RegionUnlock-selfcontained.exe` | 77 MB | 双击即用，无需安装 .NET Desktop Runtime（推荐普通用户） |
+            | `PCL2RegionUnlock-fdd.exe` | 3.3 MB | 需要已安装 **.NET 10 Desktop Runtime (x64)** — [微软官方下载](https://dotnet.microsoft.com/zh-cn/download/dotnet/10.0) |
 
             其他说明：
             - 仅测试 PCL2 CE 2.15.1 x64；其他版本会提示「未找到目标方法」。
