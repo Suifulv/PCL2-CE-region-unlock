@@ -304,7 +304,7 @@ internal static class Program
 
     private static void PrintHelp()
     {
-        Console.WriteLine("PCL2RegionUnlock — 给 PCL2 CE 官方 exe 原地解除中国大陆区域限制（第三方工具）");
+        Console.WriteLine("PCL2 CE 区域限制修复工具（PCL2RegionUnlock）— 给 PCL2 CE 官方 exe 原地解除中国大陆区域限制");
         Console.WriteLine();
         Console.WriteLine("用法:");
         Console.WriteLine("  PCL2RegionUnlock.exe [选项] [exe 路径...]");
