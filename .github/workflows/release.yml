@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Publish (self-contained single file)
+        shell: pwsh
+        run: |
+          dotnet publish src/PclRegionUnlock.csproj -c Release -r win-x64 --self-contained true `
+            -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o dist
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/PCL2RegionUnlock.exe
+          generate_release_notes: true
+          append_body: true
+          body: |
+            PCL2 CE 区域限制修复工具 v${{ github.ref_name }}
+
+            - 自包含单文件版本，无需安装 .NET 运行时。
+            - 仅测试 PCL2 CE 2.15.1 x64；其他版本会提示「未找到目标方法」。
+            - 使用前请关闭 PCL；首次运行会自动备份 `.bak`。
+            - 本工具不包含 PCL 代码、不提取密钥；请勿分发打过补丁的 PCL exe。
